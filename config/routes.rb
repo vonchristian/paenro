@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root to: 'clients#index'
   devise_for :users, controllers: { sessions: 'users/sessions' , registrations: "settings/users"}
   resources :warehouse
-  resources :client_requirements, only: [:new, :create]
   resources :programs, only: [:index, :show]
+  resources :requirement_submissions, only: [:new, :create]
   resources :clients, except: [:destroy] do
     resources :farms, only: [:new, :create, :edit, :update], module: :clients
   end

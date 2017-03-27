@@ -11,6 +11,7 @@ class Client < ApplicationRecord
   has_many :line_items, through: :orders
   has_many :farms, class_name: "Clients::Farm"
   has_many :client_requirements, class_name: "Clients::ClientRequirement"
+  has_many :requirements, through: :client_requirements
 
   validates :first_name, :middle_name, :last_name, :contact_number, presence: true
   has_attached_file :avatar,
@@ -40,7 +41,7 @@ class Client < ApplicationRecord
     granted = line_items.select{|a| a.stock.product == grant.product}
     granted.present? && granted.sum(&:quantity) != grant.quantity
   end
-  
+
   def balance_for(grant)
     granted = line_items.select{|a| a.stock.product == grant.product}
     if granted.present?

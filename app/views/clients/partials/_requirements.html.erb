@@ -1,5 +1,6 @@
 <div class="tab-pane" id="requirements">
-  Requirement Details
+  <h4>Requirements </h4>
+  <p class="text-muted"> <span class="badge bg-red"><%= Requirement.all.count %></span> Requirements &nbsp; &nbsp; <span class="badge bg-green"><%= @client.requirements.count %></span> Submitted </p>
   <hr>
   <% Requirement.all.each do |requirement| %>
     <div class="row">
@@ -7,10 +8,16 @@
         <%= requirement.name %>
       </div>
       <div class="col-md-3">
-        <% if @client.submitted?(requirement) %>
-          <btn class="btn"><i class="fa fa-toggle-off fa-2x"></i></btn>
+        <% if @client.requirements.include?(requirement) %>
+          <span classs="btn"><i class="fa fa-toggle-on fa-2x text-blue"></i></span>
         <% else %>
-          <btn class="btn"><i class="fa fa-toggle-on fa-2x"></i></btn>
+          <%= simple_form_for Clients::ClientRequirement.new, url: :requirement_submissions do |f| %>
+            <%= f.input :requirement_id, input_html: { value: requirement.id }, as: :hidden %>
+            <%= f.input :client_id, input_html: { value: @client.id }, as: :hidden %>
+            <%=button_tag type: 'submit', class: 'btn no-padding' do %>
+             <i class="fa fa-toggle-off fa-2x"></i>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
