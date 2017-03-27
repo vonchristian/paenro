@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Program, type: :model do
   describe 'associations' do
     it { is_expected.to have_many :beneficiaries }
+    it { is_expected.to have_many :program_locations }
+    it { is_expected.to have_many :barangays }
   end
 
   describe 'validations' do

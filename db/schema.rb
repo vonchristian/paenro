@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330232848) do
+ActiveRecord::Schema.define(version: 20170330232849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,17 @@ ActiveRecord::Schema.define(version: 20170330232848) do
     t.index ["name"], name: "index_products_on_name", unique: true
   end
 
+  create_table "program_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "barangay_id"
+    t.uuid "program_id"
+    t.decimal "target_area"
+    t.decimal "beneficiary_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["barangay_id"], name: "index_program_locations_on_barangay_id"
+    t.index ["program_id"], name: "index_program_locations_on_program_id"
+  end
+
   create_table "programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -227,6 +238,8 @@ ActiveRecord::Schema.define(version: 20170330232848) do
   add_foreign_key "orders", "clients"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "program_locations", "barangays"
+  add_foreign_key "program_locations", "programs"
   add_foreign_key "sitios", "barangays"
   add_foreign_key "stocks", "products"
 end

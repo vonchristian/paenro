@@ -2,6 +2,7 @@ module Settings
   class ProgramsController < ApplicationController
     def new
       @program = Program.new
+      @program.program_locations.build
     end
     def create
       @program = Program.create(program_params)
@@ -14,7 +15,7 @@ module Settings
 
     private
     def program_params
-      params.require(:program).permit(:name)
+      params.require(:program).permit(:name, :barangay_ids => [])
     end
   end
 end

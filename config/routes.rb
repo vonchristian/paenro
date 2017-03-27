@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :programs, only: [:new, :create]
     resources :requirements, only: [:new, :create]
     resources :crops, only: [:new, :create]
+    resources :program_locations, only: [:edit, :update]
     resources :municipalities, only: [:new, :create] do
       resources :barangays, only: [:new, :create]
     end

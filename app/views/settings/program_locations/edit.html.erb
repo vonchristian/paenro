@@ -1,0 +1,6 @@
+<%= simple_form_for @program_location, url: :settings_program_location do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :target_area, placeholder: 'area in hectare' %>
+  <%= f.input :beneficiary_count %>
+  <%= f.submit "Update Location", class: "btn btn-danger btn-flat" %>
+<% end %>
