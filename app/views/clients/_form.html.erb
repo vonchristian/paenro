@@ -19,7 +19,7 @@
               <hr>
               <p class="text-muted"> Address </p>
               <%= f.simple_fields_for :addresses do |aa| %>
-                <%= aa.input :sitio_id, collection: Addresses::Sitio.all.map{ |a| [a.name, a.id] }, input_html: { id: 'client_address_sitio_id'} %>
+                <%= aa.input :sitio %>
                 <%= aa.input :barangay_id, collection: Addresses::Barangay.all.map{ |a| [a.name, a.id] } %>
                 <%= aa.input :municipality_id, collection: Addresses::Municipality.all.map{ |a| [a.name, a.id] } %>
               <% end %>

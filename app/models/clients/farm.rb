@@ -9,6 +9,9 @@ module Clients
 
     validates :area, presence: true, numericality: true
     before_commit :set_name #used for pg_search_scope
+    def self.total_area
+      all.sum(&:area)
+    end
     private
     def set_name
       self.name ||= self.client.full_name

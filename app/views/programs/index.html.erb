@@ -1,27 +1,38 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-8">
     <div class="box box-default">
       <div class="box-header with-border">
         <h3 class="box-title">Program Beneficiaries</h3>
       </div>
       <div class="box-body">
-        <% @programs.each do |program| %>
-          <%= link_to program_path(program) do %>
-            <div class="row">
-              <div class="col-md-8">
-                <span class="text-muted"> <%=program.name%></span>
-              </div>
-              <div class="col-md-4">
-                <span class="pull-right badge bg-green"> <%= program.beneficiaries.count %></span>
-              </div>
-            </div>
-          <% end %>
-          <br />
-        <% end %>
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> Program </th>
+                <th> Target Beneficiaries </th>
+                <th> Actual Beneficiaries </th>
+                <th> Available Slots </th>
+                <th> Target Area </th>
+                <th> Actual Area </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @programs.each do |program| %>
+                <tr>
+                  <td width="400px"><%= program.name %></td>
+                  <td><%= program.target_beneficiaries %></td>
+                  <td><%= program.beneficiaries.count %></td>
+                  <td><%= program.available_slots %></td>
+                  <td><%= program.target_area %></td>
+                  <td><%= program.actual_area %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <!-- /.footer -->
     </div>
-  </div>
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">

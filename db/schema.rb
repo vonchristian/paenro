@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330232849) do
+ActiveRecord::Schema.define(version: 20170330232851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,12 @@ ActiveRecord::Schema.define(version: 20170330232849) do
     t.uuid "client_id"
     t.uuid "barangay_id"
     t.uuid "municipality_id"
-    t.uuid "sitio_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sitio"
     t.index ["barangay_id"], name: "index_addresses_on_barangay_id"
     t.index ["client_id"], name: "index_addresses_on_client_id"
     t.index ["municipality_id"], name: "index_addresses_on_municipality_id"
-    t.index ["sitio_id"], name: "index_addresses_on_sitio_id"
   end
 
   create_table "barangays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -221,7 +220,6 @@ ActiveRecord::Schema.define(version: 20170330232849) do
   add_foreign_key "addresses", "barangays"
   add_foreign_key "addresses", "clients"
   add_foreign_key "addresses", "municipalities"
-  add_foreign_key "addresses", "sitios"
   add_foreign_key "barangays", "municipalities"
   add_foreign_key "carts", "users"
   add_foreign_key "client_requirements", "clients"

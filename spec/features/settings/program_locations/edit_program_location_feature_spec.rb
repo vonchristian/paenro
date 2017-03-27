@@ -21,4 +21,4 @@ feature 'Edit program location' do
 
     expect(page).to have_content("can't be blank")
   end
-end 
+end
