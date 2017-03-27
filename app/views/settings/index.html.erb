@@ -18,6 +18,7 @@
       <div class="box-body">
         <% Program.all.each do |program| %>
         <h4><%= program.name %></h4>
+        <%= link_to 'Add Grant', new_settings_program_program_grant_path(program), class: "btn btn-danger btn-sm btn-flat" %>
           <% program.program_locations.each do |program_location| %>
             <div class="row">
               <div class="col-md-4">

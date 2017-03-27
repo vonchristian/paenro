@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-danger">
+      <div class="box-header with-border">
+        <h3 class="box-title"> New Program Grant Details </h3>
+      </div>
+      <div class="box-body">
+        <%=@program.name %>
+        <hr>
+        <div class="box-footer">
+          <div class="row">
+            <div class="col-md-6 border-right">
+              <% Product.all.each do |product| %>
+                <%= simple_form_for [@program, Programs::ProgramGrant.new], url: :settings_program_program_grants do |f| %>
+                  <div class="row">
+                    <div class="col-md-7">
+                      <%= product.name %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= f.input :product_id, input_html: { value: product.id }, as: :hidden %>
+                      <% if @program.program_grants.already_include?(product) %>
+                        <%= f.input :quantity, label: false, readonly: true %>
+                      <% else %>
+                        <%= f.input :quantity, label: false %>
+                      <% end %>
+                    </div>
+                    <div class="col-md-2">
+                      <% if @program.program_grants.already_include?(product) %>
+                      <btn class="btn btn-success btn-flat disabled btn-xs"> Added</btn>
+                      <% else %>
+                        <%= f.submit 'Add', class: "btn btn-danger btn-flat" %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+              <h4> Program Grants </h4>
+              <% @program.program_grants.each do |program_grant| %>
+                <div class="row">
+                  <div class="col-md-8">
+                    <%= program_grant.product_name %>
+                  </div>
+                  <div class="col-md-4">
+                    <span class="pull-right"><%=program_grant.quantity %></span>
+                  </div>
+                </div>
+                <hr>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

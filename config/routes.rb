@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   namespace :settings do
     resources :users, except: [:destroy]
     resources :categories, only: [:new, :create]
-    resources :programs, only: [:new, :create]
+    resources :programs, only: [:new, :create] do
+      resources :program_grants, only: [:new, :create]
+    end
     resources :requirements, only: [:new, :create]
     resources :crops, only: [:new, :create]
     resources :program_locations, only: [:edit, :update]

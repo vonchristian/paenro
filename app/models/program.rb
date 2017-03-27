@@ -4,6 +4,7 @@ class Program < ApplicationRecord
   has_many :barangays, through: :program_locations
   has_many :orders, through: :beneficiaries
   has_many :farms, through: :beneficiaries
+  has_many :program_grants, class_name: "Programs::ProgramGrant"
 
   validates :name, presence: true, uniqueness: true
   def self.target_area

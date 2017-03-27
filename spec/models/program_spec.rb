@@ -6,6 +6,7 @@ RSpec.describe Program, type: :model do
     it { is_expected.to have_many :program_locations }
     it { is_expected.to have_many :barangays }
     it { is_expected.to have_many :farms }
+    it { is_expected.to have_many :program_grants }
   end
 
   describe 'validations' do
