@@ -24,12 +24,26 @@
                   <td><%= program.target_beneficiaries %></td>
                   <td><%= program.beneficiaries.count %></td>
                   <td><%= program.available_slots %></td>
-                  <td><%= program.target_area %></td>
+                  <td><span class="pull-right"><%= program.target_area %></span></td>
                   <td><%= program.actual_area %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+          <div class="box-footer">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td width="400px"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><span class="pull-right"><%=@programs.target_area %> Ha.</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

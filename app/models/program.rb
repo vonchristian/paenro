@@ -6,6 +6,9 @@ class Program < ApplicationRecord
   has_many :farms, through: :beneficiaries
 
   validates :name, presence: true, uniqueness: true
+  def self.target_area
+    all.to_a.sum(&:target_area)
+  end
 
   def target_area
     program_locations.total_target_area
