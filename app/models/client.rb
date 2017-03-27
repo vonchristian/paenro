@@ -30,8 +30,27 @@ class Client < ApplicationRecord
   def self.in(program)
     all.where(program_id: program.id)
   end
+
+  def availed?(grant)
+    granted = line_items.select{|a| a.stock.product == grant.product}
+    granted.present? && granted.sum(&:quantity) >= grant.quantity
+  end
+
+  def has_balance?(grant)
+    granted = line_items.select{|a| a.stock.product == grant.product}
+    granted.present? && granted.sum(&:quantity) != grant.quantity
+  end
+  
+  def balance_for(grant)
+    granted = line_items.select{|a| a.stock.product == grant.product}
+    if granted.present?
+      grant.quantity - granted.sum(&:quantity)
+    end
+  end
+
+
   def total_orders_for(stock)
-    line_items.where(stock_id: stock.id).count 
+    line_items.where(stock_id: stock.id).sum(&:quantity)
   end
   def full_name
     "#{first_name} #{middle_name.first.try(:capitalize)}. #{last_name}"

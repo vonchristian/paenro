@@ -1,18 +1,53 @@
 <div class="tab-pane active" id='claims'>
-  <h4> Summary </h4>
-  <% @client.stocks.uniq.each do |stock| %>
-    <div class="row">
-      <div class="col-md-4">
-        <p><%= stock.name %></p>
-      </div>
-      <div class="col-md-1">
-        <span class="badge bg-gray"><%= @client.total_orders_for(stock) %></span>
-      </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h4> Transactions Summary </h4>
+      <p class="text-muted"> Summary of all client's transactions </p>
+      <br>
+      <% @client.stocks.uniq.each do |stock| %>
+        <div class="row">
+          <div class="col-md-8">
+            <p><%= stock.name %></p>
+          </div>
+          <div class="col-md-2">
+            <span class="badge bg-navy pull-right"><%= @client.total_orders_for(stock) %></span>
+          </div>
+        </div>
+        <br>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col-md-6 border-left">
+      <h4> Program Grants </h4>
+      <p class="text-muted"> Products to be availed under <%=@client.program_name %> program </p>
+      <br>
+      <% @client.program.program_grants.each do |program_grant| %>
+        <div class="row">
+          <div class="col-md-5">
+            <%=program_grant.product_name %>
+          </div>
+          <div class="col-md-2">
+            <span><%= program_grant.quantity %></span>
+          </div>
+          <div class="col-md-4 ">
+            <% if client.availed?(program_grant) %>
+              <span class="badge bg-green pull-right"> Availed </span>
+            <% elsif client.has_balance?(program_grant) %>
+              <span class="label bg-red pull-right"><%=client.balance_for(program_grant).to_i %> left </span>
+            <% else %>
+            <span class="badge bg-yellow pull-right"> Not Yet Availed </span>
+
+            <% end %>
+          </div>
+        </div>
+        <br>
+      <% end %>
+    </div>
+  </div>
 
   <hr>
   <h4> Transactions History </h4>
+  <p class="text-muted"> Listing of transactions made by client </p>
+  <br>
   <% @client.orders.each do |order| %>
     <div class="row">
       <div class="col-md-3">

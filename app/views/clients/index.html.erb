@@ -33,10 +33,10 @@
             <%=link_to client_path(client) do %>
               <div class="row">
                 <div class="col-md-2 col-sm-2 col-xs-3">
-                  <%=image_tag(client.avatar.url(:medium), height: 120, width: 120, class: "img-responsive img-square") %>
+                  <%=image_tag(client.avatar.url(:large), height: 120, width: 120, class: "img-responsive img-square") %>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-9">
-                  <span class="text-muted"><b><%=client.full_name.try(:upcase) %></b></span><br>
+                  <span class="text-blue"><b><%=client.full_name.try(:upcase) %></b></span><br>
                   <small class="text-muted"><i class="fa fa-map-marker"></i> &nbsp; <%=client.current_address %></small><br>
                   <small class="text-muted"><i class="fa fa-phone"></i> &nbsp; <%=client.contact_number %></small>
                   <p></p>
@@ -94,6 +94,27 @@
             <div class="col-md-4">
               <span class="pull-right">
                 <span class="badge bg-gray"><%= municipality.clients.uniq.count %></span>
+              </span>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+    <div class="box box-default">
+      <div class="box-header">
+        <h3 class="box-title"> Clients per Barangay </h3>
+      </div>
+      <div class="box-body">
+        <% Addresses::Barangay.all.each do |barangay| %>
+          <div class="row">
+            <div class="col-md-8">
+              <%=barangay.name %><br>
+              <small class="text-muted"><%= barangay.municipality_name %></small>
+            </div>
+            <div class="col-md-4">
+              <span class="pull-right">
+                <span class="badge bg-gray"><%= barangay.clients.uniq.count %></span>
               </span>
             </div>
           </div>
