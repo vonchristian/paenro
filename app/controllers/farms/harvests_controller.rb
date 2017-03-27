@@ -16,7 +16,7 @@ module Farms
 
     private
     def harvest_params
-      params.require(:farms_harvest).permit(:weight, :gross_income, :date_harvested)
+      params.require(:farms_harvest).permit(:weight, :gross_income, :harvest_start_date, :harvest_end_date)
     end
   end
 end

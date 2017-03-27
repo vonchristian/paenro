@@ -2,6 +2,15 @@
   <%= f.error_notification %>
   <%= f.input :weight %>
   <%= f.input :gross_income %>
-  <%= f.input :date_harvested, as: :string, input_html: { class: "datepicker" } %>
+  <%= f.input :crop_id, collection: @farm.croppings.map{ |a| [a.name, a.id] }, as: :radio_buttons %>
+  <p> Harvest Date </p>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :harvest_start_date, as: :string, input_html: { class: "datepicker", id: 'harvest_start_date' }, placeholder: "Start Date", label: false %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :harvest_end_date, as: :string, input_html: { class: "datepicker", id: 'harvest_end_date' }, placeholder: "End Date", label: false %>
+    </div>
+  </div>
   <%= f.submit "Save Harvest", class: "btn btn-primary btn-flat" %>
 <% end %>

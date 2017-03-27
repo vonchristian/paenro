@@ -10,7 +10,9 @@ module Farms
       it { is_expected.to validate_numericality_of :weight }
       it { is_expected.to validate_presence_of :gross_income }
       it { is_expected.to validate_numericality_of :gross_income }
-      it { is_expected.to validate_presence_of :date_harvested }
+      it { is_expected.to validate_presence_of :harvest_start_date }
+      it { is_expected.to validate_presence_of :harvest_end_date }
+
     end
   end
 end

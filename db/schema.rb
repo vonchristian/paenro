@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330231454) do
+ActiveRecord::Schema.define(version: 20170330232848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,10 +107,11 @@ ActiveRecord::Schema.define(version: 20170330231454) do
     t.uuid "farm_id"
     t.decimal "weight"
     t.decimal "gross_income"
-    t.datetime "date_harvested"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "cropping_id"
+    t.datetime "harvest_start_date"
+    t.datetime "harvest_end_date"
     t.index ["cropping_id"], name: "index_harvests_on_cropping_id"
     t.index ["farm_id"], name: "index_harvests_on_farm_id"
   end
