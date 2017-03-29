@@ -2,9 +2,11 @@ require 'rails_helper'
 
 feature 'Create client' do
   before(:each) do
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
     visit clients_path
     click_link "New Client"
-    
+
   end
   scenario 'with valid attributes' do
     fill_in 'First name', with: 'Von'
