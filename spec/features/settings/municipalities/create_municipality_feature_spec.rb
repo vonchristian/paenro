@@ -19,4 +19,4 @@ feature 'Create municipality' do
 
     expect(page).to have_content("can't be blank")
   end
-end 
+end
