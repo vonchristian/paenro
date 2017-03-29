@@ -8,10 +8,11 @@ class ClientsController < ApplicationController
   end
   def new
     @client = Client.new
+    @client.addresses.build
   end
   def create
     @client = Client.create(client_params)
-    if @client.save
+    if @client.save!
       redirect_to @client, notice: "Client saved successfully."
     else
       render :new
@@ -23,6 +24,6 @@ class ClientsController < ApplicationController
 
   private
   def client_params
-    params.require(:client).permit(:first_name, :middle_name, :last_name, :contact_number, :sex)
+    params.require(:client).permit(:first_name, :middle_name, :last_name, :contact_number, :sex, addresses_attributes: [:sitio_id, :barangay_id, :municipality_id])
   end
 end

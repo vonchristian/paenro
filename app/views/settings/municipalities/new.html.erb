@@ -1,0 +1,5 @@
+<%= simple_form_for @municipality, url: :settings_municipalities do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.submit "Create Municipality" %>
+<% end %>

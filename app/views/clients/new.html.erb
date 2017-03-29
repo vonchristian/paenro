@@ -5,5 +5,10 @@
   <%= f.input :last_name %>
   <%= f.input :contact_number %>
   <%= f.input :sex, collection: Client.sexes.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
+  <%= f.simple_fields_for :addresses do |aa| %>
+    <%= aa.input :sitio_id, collection: Addresses::Sitio.all.map{ |a| [a.name, a.id] } %>
+    <%= aa.input :barangay_id, collection: Addresses::Barangay.all.map{ |a| [a.name, a.id] } %>
+    <%= aa.input :municipality_id, collection: Addresses::Municipality.all.map{ |a| [a.name, a.id] } %>
+  <% end %>
   <%= f.submit "Save Client", class: "btn btn-primary" %>
 <% end %>

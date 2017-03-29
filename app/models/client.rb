@@ -2,6 +2,8 @@ class Client < ApplicationRecord
   include PgSearch
   pg_search_scope :text_search, :against => [:last_name, :first_name, :middle_name]
   enum sex: [:male, :female]
+
+  has_many :addresses
   validates :first_name, :middle_name, :last_name, :contact_number, presence: true
   has_attached_file :avatar,
   styles: { large: "120x120>",
@@ -13,7 +15,12 @@ class Client < ApplicationRecord
   :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
   :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  accepts_nested_attributes_for :addresses
   def full_name
     "#{first_name} #{middle_name.first.try(:capitalize)}. #{last_name}"
+  end
+  def current_address
+    addresses.last.try(:details)
   end
 end

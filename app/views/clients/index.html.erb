@@ -1,4 +1,4 @@
-<%= link_to 'New Client', new_client_path, class: "btn btn-primary btn-flat" %>
+
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -7,7 +7,7 @@
         <div class="col-md-2 hidden-xs">
           <h3 class="box-title"> Clients </h3>
         </div>
-        <div class="col-md-9 col-xs-12">
+        <div class="col-md-7 col-xs-12">
           <%=form_tag clients_path, method: :get, class: "search-form" do %>
             <div class="input-group">
               <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search by last name, first name, middle name ...", id: 'client-search-form' %>
@@ -18,6 +18,9 @@
               </span>
             </div>
           <% end %>
+        </div>
+        <div class="col-md-2 pull-right">
+          <%= link_to 'New Client', new_client_path, class: "btn btn-primary btn-flat" %>
         </div>
       </div>
     </div>
@@ -32,7 +35,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-9">
                   <span class="text-muted"><b><%=client.full_name.try(:upcase) %></b></span><br>
-                  <small class="text-muted"><i class="fa fa-map-marker"></i> &nbsp; <%#=client.current_address.try(:details) %></small><br>
+                  <small class="text-muted"><i class="fa fa-map-marker"></i> &nbsp; <%=client.current_address %></small><br>
                   <small class="text-muted"><i class="fa fa-phone"></i> &nbsp; <%=client.contact_number %></small>
                   <p></p>
 

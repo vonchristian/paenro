@@ -1,0 +1,5 @@
+<%= link_to 'New Barangay', new_settings_municipality_barangay_path(@municipality), class: "btn btn-primary btn-flat" %>
+
+<% @municipality.barangays.each do |barangay| %>
+  <%= link_to barangay.name, barangay_path(barangay) %>
+<% end %>

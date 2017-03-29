@@ -1,1 +1,6 @@
 <%= link_to 'New User', new_settings_user_path, class: "btn btn-primary btn-flat" %>
+<%= link_to 'New Municipality', new_settings_municipality_path, class: "btn btn-primary btn-danger btn-flat" %>
+
+<% @municipalities.each do |municipality| %>
+  <%=link_to municipality.name, municipality_path(municipality) %>
+<% end %>

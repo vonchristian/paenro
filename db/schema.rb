@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329132738) do
+ActiveRecord::Schema.define(version: 20170329133259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "client_id"
+    t.uuid "barangay_id"
+    t.uuid "municipality_id"
+    t.uuid "sitio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["barangay_id"], name: "index_addresses_on_barangay_id"
+    t.index ["client_id"], name: "index_addresses_on_client_id"
+    t.index ["municipality_id"], name: "index_addresses_on_municipality_id"
+    t.index ["sitio_id"], name: "index_addresses_on_sitio_id"
+  end
+
+  create_table "barangays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "municipality_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["municipality_id"], name: "index_barangays_on_municipality_id"
+  end
 
   create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
@@ -28,6 +49,20 @@ ActiveRecord::Schema.define(version: 20170329132738) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "municipalities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sitios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "barangay_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["barangay_id"], name: "index_sitios_on_barangay_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +84,10 @@ ActiveRecord::Schema.define(version: 20170329132738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "barangays"
+  add_foreign_key "addresses", "clients"
+  add_foreign_key "addresses", "municipalities"
+  add_foreign_key "addresses", "sitios"
+  add_foreign_key "barangays", "municipalities"
+  add_foreign_key "sitios", "barangays"
 end
