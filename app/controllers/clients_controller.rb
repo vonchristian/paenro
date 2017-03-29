@@ -12,7 +12,7 @@ class ClientsController < ApplicationController
   end
   def create
     @client = Client.create(client_params)
-    if @client.save!
+    if @client.save
       redirect_to @client, notice: "Client saved successfully."
     else
       render :new

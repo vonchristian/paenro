@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   resources :settings, only: [:index]
   resources :municipalities, only: [:show]
   resources :barangays, only: [:show]
+  resources :products, except: [:destroy] do
+    match "/scope_to_category" => "products#scope_to_category", as: :scope_to_category, via: [:get], on: :collection
+    resources :stocks, only: [:new, :create], module: :products
+  end
   namespace :settings do
     resources :users, except: [:destroy]
+    resources :categories, only: [:new, :create]
     resources :municipalities, only: [:new, :create] do
       resources :barangays, only: [:new, :create]
     end

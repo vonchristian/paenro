@@ -1,0 +1,6 @@
+<%= simple_form_for [@product, @stock], url: :product_stocks do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :quantity %>
+  <%= f.input :date, as: :string, input_html: { class: "datepicker" } %>
+  <%= f.submit "Save Stock", class: "btn btn-flat btn-primary" %>
+<% end %>

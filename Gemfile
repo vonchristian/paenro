@@ -28,6 +28,8 @@ gem 'pg_search'
 gem 'kaminari'
 gem 'devise'
 gem "paperclip"
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
