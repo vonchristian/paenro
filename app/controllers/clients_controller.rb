@@ -1,5 +1,10 @@
 class ClientsController < ApplicationController
   def index
+    if params[:search].present?
+      @clients = Client.text_search(params[:search]).page(params[:page]).per(10)
+    else
+      @clients = Client.all.order(:last_name).page(params[:page]).per(30)
+    end
   end
   def new
     @client = Client.new
@@ -14,7 +19,7 @@ class ClientsController < ApplicationController
   end
   def show
     @client = Client.find(params[:id])
-  end 
+  end
 
   private
   def client_params

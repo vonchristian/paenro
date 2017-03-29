@@ -27,6 +27,8 @@ gem 'paper_trail'
 gem 'pg_search'
 gem 'kaminari'
 gem 'devise'
+gem "paperclip"
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.5'

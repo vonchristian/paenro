@@ -1,1 +1,58 @@
 <%= link_to 'New Client', new_client_path, class: "btn btn-primary btn-flat" %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-default">
+    <div class="box-header with-border">
+      <div class="row">
+        <div class="col-md-2 hidden-xs">
+          <h3 class="box-title"> Clients </h3>
+        </div>
+        <div class="col-md-9 col-xs-12">
+          <%=form_tag clients_path, method: :get, class: "search-form" do %>
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search by last name, first name, middle name ...", id: 'client-search-form' %>
+              <span class="input-group-btn">
+                <%= button_tag(type: 'submit', id: "search-btn", class: "btn btn-flat") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+      <div class="box-body">
+       <% if @clients.present? %>
+          <% @clients.each do |client | %>
+            <%=link_to client_path(client) do %>
+              <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-3">
+                  <%=image_tag(client.avatar.url(:medium), height: 120, width: 120, class: "img-responsive img-square") %>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-9">
+                  <span class="text-muted"><b><%=client.full_name.try(:upcase) %></b></span><br>
+                  <small class="text-muted"><i class="fa fa-map-marker"></i> &nbsp; <%#=client.current_address.try(:details) %></small><br>
+                  <small class="text-muted"><i class="fa fa-phone"></i> &nbsp; <%=client.contact_number %></small>
+                  <p></p>
+
+                </div>
+                <div class="col-md-4 hidden-xs">
+
+
+                </div>
+                <div class="col-md-2 col-xs-6">
+
+                </div>
+              </div>
+              <hr>
+            <% end %>
+          <% end %>
+          <center><%= paginate @clients %> </center>
+        <% else %>
+          No clients found.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
