@@ -1,14 +1,33 @@
-<%= simple_form_for @client do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :first_name %>
-  <%= f.input :middle_name %>
-  <%= f.input :last_name %>
-  <%= f.input :contact_number %>
-  <%= f.input :sex, collection: Client.sexes.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
-  <%= f.simple_fields_for :addresses do |aa| %>
-    <%= aa.input :sitio_id, collection: Addresses::Sitio.all.map{ |a| [a.name, a.id] } %>
-    <%= aa.input :barangay_id, collection: Addresses::Barangay.all.map{ |a| [a.name, a.id] } %>
-    <%= aa.input :municipality_id, collection: Addresses::Municipality.all.map{ |a| [a.name, a.id] } %>
-  <% end %>
-  <%= f.submit "Save Client", class: "btn btn-primary" %>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"> Client Details </h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-5">
+            <%= simple_form_for @client do |f| %>
+              <%= f.error_notification %>
+              <%= f.input :first_name %>
+              <%= f.input :middle_name %>
+              <%= f.input :last_name %>
+              <%= f.input :contact_number %>
+              <%= f.input :sex, collection: Client.sexes.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
+              <%= f.simple_fields_for :addresses do |aa| %>
+                <%= aa.input :sitio_id, collection: Addresses::Sitio.all.map{ |a| [a.name, a.id] } %>
+                <%= aa.input :barangay_id, collection: Addresses::Barangay.all.map{ |a| [a.name, a.id] } %>
+                <%= aa.input :municipality_id, collection: Addresses::Municipality.all.map{ |a| [a.name, a.id] } %>
+              <% end %>
+              <div class="box-footer">
+                <%= f.submit "Save Client", class: "btn btn-primary btn-flat pull-right" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

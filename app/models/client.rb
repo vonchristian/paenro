@@ -4,6 +4,7 @@ class Client < ApplicationRecord
   enum sex: [:male, :female]
 
   has_many :addresses
+  has_many :orders 
   validates :first_name, :middle_name, :last_name, :contact_number, presence: true
   has_attached_file :avatar,
   styles: { large: "120x120>",

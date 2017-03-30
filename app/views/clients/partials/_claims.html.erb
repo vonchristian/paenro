@@ -1,0 +1,22 @@
+<div class="tab-pane active" id='claims'>
+  <% @client.orders.each do |order| %>
+    <div class="row">
+      <div class="col-md-2">
+        <%= order.date.strftime('%B %e, %Y') %>
+      </div>
+      <div class="col-md-6">
+        <% order.line_items.each do |line_item| %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= line_item.stock_name %>
+            </div>
+            <div class="col-md-6">
+              <%= line_item.quantity %> <%= line_item.unit %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329223051) do
+ActiveRecord::Schema.define(version: 20170330012512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20170329223051) do
     t.index ["municipality_id"], name: "index_barangays_on_municipality_id"
   end
 
+  create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -58,10 +65,32 @@ ActiveRecord::Schema.define(version: 20170329223051) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "order_id"
+    t.uuid "stock_id"
+    t.uuid "cart_id"
+    t.decimal "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["stock_id"], name: "index_line_items_on_stock_id"
+  end
+
   create_table "municipalities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "client_id"
+    t.index ["client_id"], name: "index_orders_on_client_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -89,10 +118,12 @@ ActiveRecord::Schema.define(version: 20170329223051) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "description"
     t.index ["product_id"], name: "index_stocks_on_product_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -116,6 +147,12 @@ ActiveRecord::Schema.define(version: 20170329223051) do
   add_foreign_key "addresses", "municipalities"
   add_foreign_key "addresses", "sitios"
   add_foreign_key "barangays", "municipalities"
+  add_foreign_key "carts", "users"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "stocks"
+  add_foreign_key "orders", "clients"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "sitios", "barangays"
   add_foreign_key "stocks", "products"

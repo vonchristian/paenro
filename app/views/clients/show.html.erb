@@ -54,14 +54,22 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#certifications" data-toggle="tab">Claims</a></li>
+              <li class="active"><a href="#claims" data-toggle="tab">Claims</a></li>
+              <li><a href="#requirements" data-toggle="tab">Requirements</a></li>
+              <li><a href="#farms" data-toggle="tab">Farms</a></li>
+
+
               <!-- <li><a href="#trainings" data-toggle="tab">Trainings</a></li>
               <li><a href="#assessments" data-toggle="tab">Assessments</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li> -->
 
             </ul>
             <div class="tab-content">
-              <%#= render 'clients/partials/certifications', client: @client %>
+              <%= render 'clients/partials/claims', client: @client %>
+              <%= render 'clients/partials/requirements' %>
+              <%= render 'clients/partials/farms' %>
+
+
               </div>
               <!-- /.tab-pane -->
             </div>

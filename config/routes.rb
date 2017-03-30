@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' , registrations: "settings/users"}
+  resources :warehouse
   resources :clients, except: [:destroy]
   resources :settings, only: [:index]
   resources :municipalities, only: [:show]
   resources :barangays, only: [:show]
+  resources :line_items
+  resources :carts, only: [:destroy]
+  resources :orders, only: [:index, :new, :create]
   resources :products, except: [:destroy] do
     match "/scope_to_category" => "products#scope_to_category", as: :scope_to_category, via: [:get], on: :collection
     resources :stocks, only: [:new, :create], module: :products
