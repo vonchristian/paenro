@@ -1,0 +1,7 @@
+<%= simple_form_for [@client, @farm], url: :client_farms do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :area %>
+  <%= f.input :suitable %>
+  <%= f.input :cleared %>
+  <%= f.submit 'Save Farm', class: 'btn btn-flat btn-primary' %>
+<% end %>

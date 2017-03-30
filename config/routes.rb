@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' , registrations: "settings/users"}
   resources :warehouse
-  resources :clients, except: [:destroy]
+  resources :clients, except: [:destroy] do
+    resources :farms, only: [:new, :create, :edit, :update], module: :clients
+  end
   resources :settings, only: [:index]
   resources :municipalities, only: [:show]
   resources :barangays, only: [:show]

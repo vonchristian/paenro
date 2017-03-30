@@ -3,6 +3,8 @@ require 'rails_helper'
 describe Client, type: :model do
   describe 'associations' do
     it { is_expected.to have_many :addresses }
+    it { is_expected.to have_many :orders }
+    it { is_expected.to have_many :farms }
   end
   describe 'validations' do
     it { is_expected.to validate_presence_of :first_name }
@@ -16,5 +18,5 @@ describe Client, type: :model do
   end
   describe 'nested attributes' do
     it { is_expected.to accept_nested_attributes_for :addresses }
-  end 
+  end
 end
