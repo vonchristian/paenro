@@ -6,5 +6,5 @@ module Clients
       it {is_expected.to belong_to :requirement }
       it { is_expected.to belong_to :client }
     end
-  end 
+  end
 end

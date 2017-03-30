@@ -19,4 +19,4 @@ module Products
       params.require(:products_stock).permit(:quantity, :date)
     end
   end
-end 
+end

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     resources :farms, only: [:new, :create, :edit, :update], module: :clients
   end
   resources :farms, only: [:index, :show] do
-    resources :harvests, only: [:new, :create], module: :clients
+    resources :harvests, only: [:new, :create], module: :farms
+    resources :croppings, only: [:new, :create], module: :farms
   end
   resources :settings, only: [:index]
   resources :municipalities, only: [:show]
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:new, :create]
     resources :programs, only: [:new, :create]
     resources :requirements, only: [:new, :create]
+    resources :crops, only: [:new, :create]
     resources :municipalities, only: [:new, :create] do
       resources :barangays, only: [:new, :create]
     end

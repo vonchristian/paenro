@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module Clients
+module Farms
   describe Harvest do
     describe 'associations' do
       it { is_expected.to belong_to :farm }

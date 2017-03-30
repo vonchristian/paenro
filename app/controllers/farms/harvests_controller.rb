@@ -1,4 +1,4 @@
-module Clients
+module Farms
   class HarvestsController < ApplicationController
     def new
       @farm = Clients::Farm.find(params[:farm_id])
@@ -16,7 +16,7 @@ module Clients
 
     private
     def harvest_params
-      params.require(:clients_harvest).permit(:weight, :gross_income, :date_harvested)
+      params.require(:farms_harvest).permit(:weight, :gross_income, :date_harvested)
     end
   end
 end

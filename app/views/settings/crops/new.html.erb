@@ -1,0 +1,5 @@
+<%= simple_form_for @crop, url: :settings_crops do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.submit "Create Crop" %>
+<% end %>

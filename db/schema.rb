@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330130431) do
+ActiveRecord::Schema.define(version: 20170330231454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(version: 20170330130431) do
     t.index ["program_id"], name: "index_clients_on_program_id"
   end
 
+  create_table "croppings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "farm_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "crop_id"
+    t.index ["crop_id"], name: "index_croppings_on_crop_id"
+    t.index ["farm_id"], name: "index_croppings_on_farm_id"
+  end
+
+  create_table "crops", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "farms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
     t.decimal "area"
@@ -95,6 +110,8 @@ ActiveRecord::Schema.define(version: 20170330130431) do
     t.datetime "date_harvested"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "cropping_id"
+    t.index ["cropping_id"], name: "index_harvests_on_cropping_id"
     t.index ["farm_id"], name: "index_harvests_on_farm_id"
   end
 
@@ -198,7 +215,10 @@ ActiveRecord::Schema.define(version: 20170330130431) do
   add_foreign_key "client_requirements", "clients"
   add_foreign_key "client_requirements", "requirements"
   add_foreign_key "clients", "programs"
+  add_foreign_key "croppings", "crops"
+  add_foreign_key "croppings", "farms"
   add_foreign_key "farms", "clients"
+  add_foreign_key "harvests", "croppings"
   add_foreign_key "harvests", "farms"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"

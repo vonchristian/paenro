@@ -3,7 +3,9 @@ module Clients
     include PgSearch
     pg_search_scope :text_search, :against => [:name]
     belongs_to :client
-    has_many :harvests, class_name: "Clients::Harvest"
+    has_many :harvests, class_name: "Farms::Harvest"
+    has_many :croppings, class_name: "Farms::Cropping"
+    has_many :crops
 
     validates :area, presence: true, numericality: true
     before_commit :set_name #used for pg_search_scope
