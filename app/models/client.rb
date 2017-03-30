@@ -6,6 +6,7 @@ class Client < ApplicationRecord
   has_many :addresses
   has_many :orders
   has_many :farms, class_name: "Clients::Farm"
+  has_many :client_requirements, class_name: "Clients::ClientRequirement"
 
   validates :first_name, :middle_name, :last_name, :contact_number, presence: true
   has_attached_file :avatar,
@@ -25,5 +26,8 @@ class Client < ApplicationRecord
   end
   def current_address
     addresses.last.try(:details)
+  end
+  def submitted?(requirement)
+    client_requirements.include?(requirement)
   end
 end

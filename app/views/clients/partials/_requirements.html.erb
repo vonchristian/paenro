@@ -1,3 +1,19 @@
 <div class="tab-pane" id="requirements">
   Requirements
+  <hr>
+  <% Requirement.all.each do |requirement| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= requirement.name %>
+      </div>
+      <div class="col-md-3">
+        <% if @client.submitted?(requirement) %>
+          <btn class="btn"><i class="fa fa-toggle-off fa-2x"></i></btn>
+        <% else %>
+          <btn class="btn"><i class="fa fa-toggle-on fa-2x"></i></btn>
+        <% end %>
+      </div>
+    </div>
+    <br>
+  <% end %>
 </div>

@@ -20,6 +20,7 @@ class ClientsController < ApplicationController
   end
   def show
     @client = Client.find(params[:id])
+    @requirement = @client.client_requirements.build
   end
 
   private
