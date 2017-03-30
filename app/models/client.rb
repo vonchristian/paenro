@@ -3,8 +3,12 @@ class Client < ApplicationRecord
   pg_search_scope :text_search, :against => [:last_name, :first_name, :middle_name]
   enum sex: [:male, :female]
 
+  belongs_to :program
   has_many :addresses
+
   has_many :orders
+  has_many :stocks, through: :orders
+  has_many :line_items, through: :orders
   has_many :farms, class_name: "Clients::Farm"
   has_many :client_requirements, class_name: "Clients::ClientRequirement"
 
@@ -20,7 +24,15 @@ class Client < ApplicationRecord
   :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :addresses, :farms
+
+  delegate :name, to: :program, prefix: true, allow_nil: true
+  def self.in(program)
+    all.where(program_id: program.id)
+  end
+  def total_orders_for(stock)
+    line_items.where(stock_id: stock.id).count 
+  end
   def full_name
     "#{first_name} #{middle_name.first.try(:capitalize)}. #{last_name}"
   end

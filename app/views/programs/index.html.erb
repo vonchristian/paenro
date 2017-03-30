@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">Program Beneficiaries</h3>
+      </div>
+      <div class="box-body">
+        <% @programs.each do |program| %>
+          <%= link_to program_path(program) do %>
+            <div class="row">
+              <div class="col-md-8">
+                <span class="text-muted"> <%=program.name%></span>
+              </div>
+              <div class="col-md-4">
+                <span class="pull-right badge bg-green"> <%= program.beneficiaries.count %></span>
+              </div>
+            </div>
+          <% end %>
+          <br />
+        <% end %>
+      </div>
+      <!-- /.footer -->
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"> Beneficiaries per Municipality </h3>
+      </div>
+      <div class="box-body">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> Municipality </th>
+                <% @programs.each do |program| %>
+                  <th> <%= program.name %></th>
+                <% end %>
+            </thead>
+            <tbody>
+              <% Addresses::Municipality.all.each do |municipality| %>
+                <tr>
+                  <td><%= municipality.name %> <span class="badge bg-navy pull-right"><%= municipality.clients.uniq.count %></span></td>
+                  <% @programs.each do |program| %>
+                    <td><%=municipality.clients.in(program).uniq.count %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>

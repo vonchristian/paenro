@@ -1,7 +1,21 @@
 <div class="tab-pane active" id='claims'>
+  <h4> Summary </h4>
+  <% @client.stocks.uniq.each do |stock| %>
+    <div class="row">
+      <div class="col-md-4">
+        <p><%= stock.name %></p>
+      </div>
+      <div class="col-md-1">
+        <span class="badge bg-gray"><%= @client.total_orders_for(stock) %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <hr>
+  <h4> Transactions History </h4>
   <% @client.orders.each do |order| %>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <b><%= order.date.strftime('%B %e, %Y') %></b>
       </div>
       <div class="col-md-6">

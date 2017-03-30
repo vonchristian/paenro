@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div class="box box-default">
     <div class="box-header with-border">
       <div class="row">
@@ -20,7 +20,9 @@
           <% end %>
         </div>
         <div class="col-md-2 pull-right">
-          <%= link_to 'New Client', new_client_path, class: "btn btn-primary btn-flat" %>
+          <%= link_to new_client_path, title: "New Client" do %>
+            <span class="btn btn-primary pull-right" title="New Client" data-toggle="tooltip"><i class="fa fa-user-plus"></i></span>
+          <% end %>
         </div>
       </div>
     </div>
@@ -42,7 +44,7 @@
                 </div>
                 <div class="col-md-4 hidden-xs">
 
-
+                 <span class="text-muted"> <%= client.program_name %></span>
                 </div>
                 <div class="col-md-2 col-xs-6">
 
@@ -58,4 +60,38 @@
       </div>
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="box box-default">
+      <div class="row">
+        <div class="col-md-6 border-right">
+          <h2><center><%= @clients.male.count %></center></h2>
+          <center><small> MALE </small>
+        </div>
+        <div class="col-md-6">
+          <h2><center><%= @clients.female.count %></center></h2>
+          <center><small> FEMALE </small>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="box box-default">
+      <div class="box-header">
+        <h3 class="box-title"> Clients per Municipality </h3>
+      </div>
+      <div class="box-body">
+        <% Addresses::Municipality.all.each do |municipality| %>
+          <div class="row">
+            <div class="col-md-8">
+              <%=municipality.name %>
+            </div>
+            <div class="col-md-4">
+              <span class="pull-right">
+                <span class="badge bg-gray"><%= municipality.clients.uniq.count %></span>
+              </span>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
 </div>

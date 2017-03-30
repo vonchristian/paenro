@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330022048) do
+ActiveRecord::Schema.define(version: 20170330031754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20170330022048) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.uuid "program_id"
+    t.index ["program_id"], name: "index_clients_on_program_id"
   end
 
   create_table "farms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -121,6 +123,13 @@ ActiveRecord::Schema.define(version: 20170330022048) do
     t.string "unit"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["name"], name: "index_products_on_name", unique: true
+  end
+
+  create_table "programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_programs_on_name", unique: true
   end
 
   create_table "requirements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -176,6 +185,7 @@ ActiveRecord::Schema.define(version: 20170330022048) do
   add_foreign_key "carts", "users"
   add_foreign_key "client_requirements", "clients"
   add_foreign_key "client_requirements", "requirements"
+  add_foreign_key "clients", "programs"
   add_foreign_key "farms", "clients"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"

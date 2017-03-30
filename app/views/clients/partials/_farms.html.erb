@@ -1,11 +1,11 @@
 <div class="tab-pane" id='farms'>
-  Farms
-  <%= link_to 'New Farm', new_client_farm_path(@client), class: "btn btn-primary btn-flat" %>
+  Farm Details
+  <span class="pull-right"><%= link_to 'New Farm', new_client_farm_path(@client), class: "btn btn-primary btn-flat" %></span>
   <hr>
   <% @client.farms.each do |farm| %>
     <div class="row">
       <div class="col-md-4">
-        <%= farm.area %> Hectare
+        Area: <%= farm.area %> Hectare
       </div>
       <div class="col-md-2">
         <%#= farm.suitable %>

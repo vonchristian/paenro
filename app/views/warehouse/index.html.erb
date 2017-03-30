@@ -13,7 +13,7 @@
         <div class="col-md-12">
             <%=form_tag warehouse_index_path, method: :get, id: "search-form" do %>
              <div class="input-group">
-               <%= text_field_tag :search, params[:search], class: "search-query form-control input-lg", placeholder: "Search...", type: "search" %>
+               <%= text_field_tag :search, params[:search], class: "search-query form-control input-lg", placeholder: "Search for product...", type: "search" %>
                <span class="input-group-btn">
                  <%= button_tag(type: 'submit', class: "btn btn-flat btn-lg") do %>
                    <i class="fa fa-search"></i>
@@ -28,7 +28,7 @@
             <thead>
               <tr>
                 <th>Product</th>
-                <th>IN STOCK </th>
+                <th class="text-right">IN STOCK </th>
                 <th class="text-right">Quantity </th>
                 <th></th>
               </tr>
@@ -37,18 +37,18 @@
               <%@stocks.each do |stock| %>
                   <tr>
                     <td>
-                      <h4><%=stock.name.try(:upcase) %></h4>
+                      <p><b><%=stock.name.try(:upcase) %></b></p>
                     </td>
-                    <td><h4><%=number_to_currency(stock.in_stock, unit: "")%></h4></td>
+                    <td><p class="pull-right"><%=number_to_currency(stock.in_stock, unit: "")%></p></td>
                       <%=simple_form_for @line_item, url: :line_items do |f| %>
                         <%=f.error_notification %>
-                        <td width="130px">
-                          <%=f.input :quantity,  input_html: {value: 1, max: stock.quantity, class: "input-lg"}, autofocus: true, label: false %>
+                        <td width="130px pull-right">
+                          <%=f.input :quantity,  input_html: {value: 1, max: stock.quantity }, autofocus: true, label: false %>
                           <%=f.input :stock_id, input_html: {value: stock.id }, as: :hidden %>
                         </td>
                         <td width="60px">
                           <div class="pull-right">
-                            <%=f.submit "Add", data: {disable_with: "Adding Product..."}, class: "btn btn-primary btn-lg active" %>
+                            <%=f.submit "Add", data: {disable_with: "Adding Product..."}, class: "btn btn-primary btn-flat" %>
                           </div>
                         </td>
                       <% end %>
@@ -70,7 +70,7 @@
             <% else %>
               <h4> <i class="fa fa-cart-plus fa-2x"></i> <span class='badge badge-notify'><%=@cart.line_items.count %></span> <span>Items in Cart</span>
                 <span class="pull-right">
-                  <%= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
+                  <%#= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
                 </span>
               </h4>
               <hr>
@@ -78,13 +78,15 @@
           </div>
           <div class="box-body">
             <%=render @cart.line_items %>
-          <div class="box-footer">
-            <%= simple_form_for Order.new do |f| %>
-              <%= f.input :client_id, collection: Client.all.map{ |a| [a.full_name, a.id] }, prompt: 'Select Client'%>
-              <%= f.input :date, label: "Date Released", as: :string, input_html: { class: "datepicker" } %>
-              <%= f.submit "Checkout", class: "btn btn-success btn-block btn-flat" %>
-            <% end %>
-          </div>
+          <% if @cart.line_items.present? %>
+            <div class="box-footer">
+              <%= simple_form_for Order.new do |f| %>
+                <%= f.input :client_id, collection: Client.all.map{ |a| [a.full_name, a.id] }, prompt: 'Select Client'%>
+                <%= f.input :date, label: "Date Released", as: :string, input_html: { class: "datepicker" } %>
+                <%= f.submit "Checkout", class: "btn btn-success btn-block btn-flat" %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

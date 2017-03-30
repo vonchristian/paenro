@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  root to: 'clients#index'
   devise_for :users, controllers: { sessions: 'users/sessions' , registrations: "settings/users"}
   resources :warehouse
   resources :client_requirements, only: [:new, :create]
+  resources :programs, only: [:index, :show]
   resources :clients, except: [:destroy] do
     resources :farms, only: [:new, :create, :edit, :update], module: :clients  end
   resources :settings, only: [:index]
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   namespace :settings do
     resources :users, except: [:destroy]
     resources :categories, only: [:new, :create]
+    resources :programs, only: [:new, :create]
     resources :requirements, only: [:new, :create]
     resources :municipalities, only: [:new, :create] do
       resources :barangays, only: [:new, :create]

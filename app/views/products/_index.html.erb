@@ -4,13 +4,20 @@
       <div class="box-body">
       <h4 class="title"> Categories </h4>
         <% Category.all.each do |category| %>
-        <ul>
-          <li><%=link_to category.name, scope_to_category_products_path(category: category)  %></li>
-        </ul>
+        <div class="row">
+          <div class="col-md-8">
+            <%=link_to category.name, scope_to_category_products_path(category: category)  %>
+          </div>
+          <div class="col-md-4">
+            <span class="pull-right badge bg-blue"><%= category.products.count %></span>
+          </div>
+        </div>
+        <br>
         <% end %>
       </div>
     </div>
   </div>
+
   <div class="col-md-9">
     <div class="box box-default">
       <div class="box-header with-border">
@@ -45,7 +52,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th><span class='pull-right'> Deliveries </span> </th>
+                <th><span class='pull-right'> Stocks </span> </th>
                 <th><span class='pull-right'>In Stock</span></th>
                 <th><span class='pull-right'>Claimed </span></th>
                 <th></th>

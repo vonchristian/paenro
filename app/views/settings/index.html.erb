@@ -2,6 +2,7 @@
 <%= link_to 'New Municipality', new_settings_municipality_path, class: "btn btn-primary btn-danger btn-flat" %>
 <%= link_to 'New Category', new_settings_category_path, class: "btn btn-primary btn-flat" %>
 <%= link_to 'New Requirement', new_settings_requirement_path, class: "btn btn-danger btn-flat" %>
+<%= link_to 'New Program', new_settings_program_path, class: "btn btn-primary btn-flat" %>
 <% @municipalities.each do |municipality| %>
   <%=link_to municipality.name, municipality_path(municipality) %>
 <% end %>

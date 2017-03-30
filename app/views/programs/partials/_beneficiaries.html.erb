@@ -1,0 +1,16 @@
+<div class="tab-pane active" id='beneficiaries'>
+  <% @program.beneficiaries.each do |client| %>
+    <%= link_to client_path(client) do %>
+      <div class="row">
+        <div class="col-md-1">
+          <%=image_tag(client.avatar.url(:small), class: "img-circle") %>
+        </div>
+        <div class="col-md-4">
+          <span class="text-muted"><b><%= client.full_name.upcase %></b></span><br>
+          <small class="text-muted"><%=client.current_address %></small>
+        </div>
+      </div>
+    <% end %>
+    <br>
+  <% end %>
+</div>

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Client, type: :model do
   describe 'associations' do
+    it { is_expected.to belong_to :program }
     it { is_expected.to have_many :addresses }
     it { is_expected.to have_many :orders }
     it { is_expected.to have_many :farms }
