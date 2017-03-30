@@ -64,12 +64,19 @@
     <div class="box box-default">
       <div class="row">
         <div class="col-md-6 border-right">
-          <h2><center><%= @clients.male.count %></center></h2>
+          <h2><center><%= Client.male.count %></center></h2>
           <center><small> MALE </small>
         </div>
         <div class="col-md-6">
-          <h2><center><%= @clients.female.count %></center></h2>
+          <h2><center><%= Client.female.count %></center></h2>
           <center><small> FEMALE </small>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <h2><center><%= Client.count %></center></h2>
+          <center><small> TOTAL CLIENTS </small>
         </div>
       </div>
       <br>

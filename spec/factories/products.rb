@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :product do
     name "MyString"
     description "MyString"
-    category nil
+    category
+    unit 'kg'
   end
 end

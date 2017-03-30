@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330031754) do
+ActiveRecord::Schema.define(version: 20170330130431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,19 @@ ActiveRecord::Schema.define(version: 20170330031754) do
     t.boolean "cleared", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "harvested", default: false
+    t.string "name"
     t.index ["client_id"], name: "index_farms_on_client_id"
+  end
+
+  create_table "harvests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "farm_id"
+    t.decimal "weight"
+    t.decimal "gross_income"
+    t.datetime "date_harvested"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farm_id"], name: "index_harvests_on_farm_id"
   end
 
   create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -187,6 +199,7 @@ ActiveRecord::Schema.define(version: 20170330031754) do
   add_foreign_key "client_requirements", "requirements"
   add_foreign_key "clients", "programs"
   add_foreign_key "farms", "clients"
+  add_foreign_key "harvests", "farms"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "stocks"

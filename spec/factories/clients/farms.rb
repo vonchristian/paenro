@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :farm do
-    client nil
+  factory :farm, class: "Clients::Farm" do
+    client
     area "9.99"
     suitable false
     cleared false

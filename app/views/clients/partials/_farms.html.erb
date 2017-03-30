@@ -8,9 +8,11 @@
         Area: <%= farm.area %> Hectare
       </div>
       <div class="col-md-2">
-        <%#= farm.suitable %>
+          <%=link_to 'New Harvest', new_farm_harvest_path(farm) %>
       </div>
     </div>
-
+    <br>
   <% end %>
+  <hr>
+  <h4> Monitoring </h4>
 </div>

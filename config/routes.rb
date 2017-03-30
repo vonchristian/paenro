@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :client_requirements, only: [:new, :create]
   resources :programs, only: [:index, :show]
   resources :clients, except: [:destroy] do
-    resources :farms, only: [:new, :create, :edit, :update], module: :clients  end
+    resources :farms, only: [:new, :create, :edit, :update], module: :clients
+  end
+  resources :farms, only: [:index, :show] do
+    resources :harvests, only: [:new, :create], module: :clients
+  end
   resources :settings, only: [:index]
   resources :municipalities, only: [:show]
   resources :barangays, only: [:show]

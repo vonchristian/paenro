@@ -5,5 +5,6 @@ FactoryGirl.define do
     last_name    { Faker::Name.last_name }
     contact_number {Faker::Number.number(12)}
     sex 1
+    program
   end
 end

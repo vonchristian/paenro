@@ -1,0 +1,7 @@
+<%= simple_form_for [@farm, @harvest], url: :farm_harvests do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :weight %>
+  <%= f.input :gross_income %>
+  <%= f.input :date_harvested, as: :string, input_html: { class: "datepicker" } %>
+  <%= f.submit "Save Harvest", class: "btn btn-primary btn-flat" %>
+<% end %>
