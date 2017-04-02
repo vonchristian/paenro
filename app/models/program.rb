@@ -20,6 +20,16 @@ class Program < ApplicationRecord
   def target_beneficiaries
     program_locations.total_target_beneficiaries
   end
+  def actual_beneficiaries
+    beneficiaries.count
+  end
+  def target_percentage
+    if !actual_beneficiaries.zero? && !target_beneficiaries.zero?
+      (actual_beneficiaries / target_beneficiaries )  * 100
+    else
+      0
+    end
+  end
   def available_slots
     target_beneficiaries - beneficiaries.count
   end
