@@ -15,7 +15,7 @@ module Settings
 
     private
     def program_params
-      params.require(:program).permit(:name, :barangay_ids => [])
+      params.require(:program).permit(:name)
     end
   end
 end

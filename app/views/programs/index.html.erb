@@ -25,9 +25,9 @@
               <% @programs.each do |program| %>
               <div class="row">
                 <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="<%=program.target_percentage%>" data-width="90" data-height="90" data-fgColor="#3c8dbc">
+                  <input type="text" class="knob" value="<%=program.target_percentage %>" data-width="90" data-height="90" data-fgColor="#3c8dbc" readonly="true">
 
-                  <div class="knob-label"><%= program.name %> | <%=program.target_percentage %></div>
+                  <div class="knob-label"><%= program.name %><%= program.target_percentage %></div>
                 </div>
               </div>
               <% end %>
