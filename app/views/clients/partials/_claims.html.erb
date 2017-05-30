@@ -55,14 +55,17 @@
       <div class="col-md-3">
         <b><%= order.date.strftime('%B %e, %Y') %></b>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-9">
         <% order.line_items.each do |line_item| %>
           <div class="row">
             <div class="col-md-6">
               <%= line_item.stock_name %>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
               <%= line_item.quantity %> <%= line_item.unit %>
+            </div>
+            <div class="col-md-3">
+              <%=number_to_currency line_item.total_cost %>
             </div>
           </div>
         <% end %>

@@ -18,6 +18,6 @@ class LineItemsController < ApplicationController
 
   private
   def line_item_params
-    params.require(:orders_line_item).permit(:stock_id, :quantity)
+    params.require(:orders_line_item).permit(:stock_id, :quantity, :unit_cost, :total_cost)
   end
 end

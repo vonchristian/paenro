@@ -13,12 +13,12 @@
         <li class="active"><a href="#stocks" data-toggle="tab">Beneficiaries &nbsp; <span class="badge bg-gray"><%= @program.beneficiaries.count %></span></a></li>
         <li><a href="#claimed" data-toggle="tab">Claimed Products</a></li>
         <li><a href="#business_settings" data-toggle="tab">Reports</a></li>
-        <li><a href="#business_settings" data-toggle="tab">Settings</a></li>
+        <li><a href="#program-settings" data-toggle="tab">Settings</a></li>
 
       </ul>
       <div class="tab-content">
         <%=render 'programs/partials/beneficiaries' %>
-        <%#=render 'products/partials/claimed' %>
+        <%=render 'programs/partials/settings' %>
         <%#=render 'businesses/partials/business_info' %>
         <%#=render 'businesses/partials/permits' %>
         <%#=render 'businesses/partials/settings' %>

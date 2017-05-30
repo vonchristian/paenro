@@ -1,41 +1,139 @@
-<%= link_to 'New User', new_settings_user_path, class: "btn btn-primary btn-flat" %>
-<%= link_to 'New Municipality', new_settings_municipality_path, class: "btn btn-primary btn-danger btn-flat" %>
-<%= link_to 'New Category', new_settings_category_path, class: "btn btn-primary btn-flat" %>
-<%= link_to 'New Requirement', new_settings_requirement_path, class: "btn btn-danger btn-flat" %>
-<%= link_to 'New Program', new_settings_program_path, class: "btn btn-primary btn-flat" %>
-<%= link_to 'New Crop', new_settings_crop_path, class: "btn btn-primary btn-flat" %>
-
-<% @municipalities.each do |municipality| %>
-  <%=link_to municipality.name, municipality_path(municipality) %>
-<% end %>
-
 <div class="row">
   <div class="col-md-8">
-    <div class="box box-danger">
+    <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title"> Program Settings </h3>
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="box-title"> Programs </h3>
+          </div>
+          <div class="col-md-4">
+            <%= link_to 'New Program', new_settings_program_path, class: "btn btn-primary btn-xs btn-flat pull-right" %>
+          </div>
+        </div>
       </div>
       <div class="box-body">
         <% Program.all.each do |program| %>
-        <h4><%= program.name %></h4>
-        <%= link_to 'Add Grant', new_settings_program_program_grant_path(program), class: "btn btn-danger btn-sm btn-flat" %>
-          <% program.program_locations.each do |program_location| %>
+        <div class="row">
+          <div class="col-md-8">
+            <b class="text-muted"><%= link_to program.name, program %> </b>
+          </div>
+        </div>
+        <hr>
+        <% end %>
+      </div>
+    </div>
+    <!-- Crops -->
+    <div class="box box-default">
+      <div class="box-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="box-title"> Crops </h3>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'New Crop', new_settings_crop_path, class: "btn btn-primary btn-flat btn-xs pull-right" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+      </div>
+    </div> 
+  </div>
+  <div class="col-md-4">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="box-title"> Employees </h3>
+          </div>
+          <div class="col-md-4">
+            <%= link_to 'New User', new_settings_user_path, class: "btn btn-primary btn-flat btn-xs" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <% User.all.each do |user| %>
+          <div class="row">
+            <div class="col-md-3">
+              <%=image_tag(user.avatar.url(:medium), class: "img-circle", height: 40, width: 40) %>
+            </div>
+            <div class="col-md-9">
+              <b><%=user.full_name %></b>
+            </div>
+          </div>
+          <br>
+        <% end %>
+      </div>
+    </div>
+    <!--Municipalities -->
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="box-title"> Municipalities </h3>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'New Municipality', new_settings_municipality_path, class: "btn btn-primary btn-xs btn-flat pull-right" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <% Addresses::Municipality.all.each do |municipality| %>
+          <%=link_to municipality_path(municipality) do %>
             <div class="row">
-              <div class="col-md-4">
-                &nbsp; &nbsp; &nbsp; <%= program_location.name %>
-              </div>
-              <div class="col-md-3">
-                <span class="pull-right"><%= number_to_currency program_location.target_area, unit: "" %> Hectares </span>
-              </div>
-              <div class="col-md-3">
-                <span class="pull-right"><%= number_to_currency program_location.beneficiary_count, unit: "" %> beneficiaries </span>
-              </div>
-              <div class="col-md-2">
-                <%= link_to 'Update', edit_settings_program_location_path(program_location)  %>
+              <div class="col-md-9">
+                <b class="text-muted"><%=municipality.name %></b><br>
               </div>
             </div>
-            <br>
           <% end %>
+          <br>
+        <% end %>
+      </div>
+    </div>
+    <!--Categories -->
+    <div class="box box-default">
+      <div class="box-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="box-title">Categories </h3>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'New Category', new_settings_category_path, class: "btn btn-primary btn-flat btn-xs pull-right" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <% Category.all.each do |category| %>
+          <div class="row">
+
+            <div class="col-md-9">
+              <b><%=category.name %></b><br>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+    <!--Requirements -->
+    <div class="box box-default">
+      <div class="box-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="box-title">Requirements </h3>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'New Requirement', new_settings_requirement_path, class: "btn btn-primary btn-flat btn-xs" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <% Requirement.all.each do |requirement| %>
+          <div class="row">
+
+            <div class="col-md-9">
+              <b><%= requirement.name %></b><br>
+            </div>
+          </div>
+          <hr>
         <% end %>
       </div>
     </div>

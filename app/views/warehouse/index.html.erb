@@ -45,6 +45,7 @@
                         <td width="130px pull-right">
                           <%=f.input :quantity,  input_html: {value: 1, max: stock.quantity }, autofocus: true, label: false %>
                           <%=f.input :stock_id, input_html: {value: stock.id }, as: :hidden %>
+                          <%= f.input :unit_cost, input_html: {value: stock.unit_cost }, as: :hidden %>
                         </td>
                         <td width="60px">
                           <div class="pull-right">
@@ -68,11 +69,11 @@
             <% if @cart.line_items.blank? %>
               <center><%=image_tag('empty_cart.png', height: 150, width: 150) %></center>
             <% else %>
-            <%= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
+            <%#= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
 
               <h4> <span class='badge badge-notify'><%=@cart.line_items.count %></span> <span>Items in Cart</span>
                 <span class="pull-right">
-                  <%#= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
+                  <%= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
                 </span>
               </h4>
               <hr>
@@ -81,6 +82,14 @@
           <div class="box-body">
             <%=render @cart.line_items %>
           <% if @cart.line_items.present? %>
+          <div class="row">
+            <div class="col-md-8">
+              <h4><b> TOTAL </b></h4>
+            </div>
+            <div class="col-md-4 pull-right">
+              <h4><b><%=number_to_currency @cart.line_items.total %></b></h4>
+            </div>
+          </div>
             <div class="box-footer">
               <%= simple_form_for Order.new do |f| %>
                 <%= f.input :client_id, collection: Client.all.map{ |a| [a.full_name, a.id] }, prompt: 'Select Client'%>

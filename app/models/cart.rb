@@ -4,7 +4,7 @@ class Cart < ApplicationRecord
   def add_line_item(line_item)
     if self.stocks.include?(line_item.stock)
       self.line_items.where(stock_id: line_item.stock.id).delete_all
-      self.line_items.create(stock_id: line_item.stock.id, quantity: line_item.quantity)
+      self.line_items.create(stock_id: line_item.stock.id, quantity: line_item.quantity, unit_cost: line_item.stock.unit_cost)
     else
       self.line_items.create(stock_id: line_item.stock.id, quantity: line_item.quantity)
     end
