@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
       session[:cart_id] = nil
       redirect_to warehouse_index_url, notice: 'Client order saved successfully.'
     else
+      redirect_to warehouse_index_url, alert: 'Order not processed successfully.'
       @cart = current_cart
     end
   end

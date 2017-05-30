@@ -1,6 +1,8 @@
 <%= simple_form_for [@product, @stock], url: :product_stocks do |f| %>
   <%= f.error_notification %>
-  <%= f.input :quantity %>
+  <%= f.input :quantity, input_html: { id: 'stock_quantity', oninput: "calculateTotalCostOfStock()" } %>
+  <%= f.input :unit_cost, input_html: { id: 'stock_unit_cost', oninput: "calculateTotalCostOfStock()" } %>
+  <%= f.input :total_cost, readonly: true, input_html: { id: 'stock_total_cost' } %>
   <%= f.input :date, as: :string, input_html: { class: "datepicker" } %>
   <%= f.submit "Save Stock", class: "btn btn-flat btn-primary" %>
 <% end %>

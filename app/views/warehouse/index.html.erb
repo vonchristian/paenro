@@ -68,7 +68,9 @@
             <% if @cart.line_items.blank? %>
               <center><%=image_tag('empty_cart.png', height: 150, width: 150) %></center>
             <% else %>
-              <h4> <i class="fa fa-cart-plus fa-2x"></i> <span class='badge badge-notify'><%=@cart.line_items.count %></span> <span>Items in Cart</span>
+            <%= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
+
+              <h4> <span class='badge badge-notify'><%=@cart.line_items.count %></span> <span>Items in Cart</span>
                 <span class="pull-right">
                   <%#= link_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure you want to empty cart?'}, class: "btn btn-danger btn-xs" %>
                 </span>

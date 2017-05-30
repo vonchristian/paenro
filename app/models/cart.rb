@@ -1,5 +1,5 @@
 class Cart < ApplicationRecord
-  has_many :line_items, class_name: "Orders::LineItem"
+  has_many :line_items, class_name: "Orders::LineItem", dependent: :destroy
   has_many :stocks, through: :line_items, class_name: "Products::Stock"
   def add_line_item(line_item)
     if self.stocks.include?(line_item.stock)
