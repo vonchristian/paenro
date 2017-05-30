@@ -5,7 +5,7 @@ require 'mina/rbenv'
 require 'mina/puma'
 
 set :whenever_name, 'production'
-set :domain, '192.168.254.107'
+set :domain, '192.168.254.109'
 set :deploy_to, '/var/www/paenro'
 set :repository, 'https://github.com/vonchristian/paenro.git'
 set :branch, 'master'
