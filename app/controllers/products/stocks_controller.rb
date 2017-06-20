@@ -16,7 +16,7 @@ module Products
 
     private
     def stock_params
-      params.require(:products_stock).permit(:quantity, :date)
+      params.require(:products_stock).permit(:quantity, :unit_cost, :total_cost, :date)
     end
   end
 end

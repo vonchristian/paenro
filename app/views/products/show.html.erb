@@ -3,18 +3,15 @@
     <div class="box box-widget widget-user-2">
       <!-- Add the bg color to the header using any of the bg-* classes -->
       <div class="widget-user-header">
-        <div class="widget-user-image">
-          <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="Product Image">
-        </div>
         <!-- /.widget-user-image -->
         <h3 class="widget-user-username"><%= @product.name.upcase %></h3>
-        <h5 class="widget-user-desc"><span class='text-green'> IN STOCK: <%= @product.in_stock %> </span></h5>
+        <h5 class="widget-user-desc"><span class='text-green'> IN STOCK: <%= @product.in_stock %> </span> &nbsp; <span class='text-red'> CLAIMED: <%= @product.claimed %> </span></h5>
+
       </div>
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#stocks" data-toggle="tab">Stocks</a></li>
         <li><a href="#claimed" data-toggle="tab">Claimed</a></li>
-        <li><a href="#business_settings" data-toggle="tab">Settings</a></li>
       </ul>
       <div class="tab-content">
         <%=render 'products/partials/stocks' %>

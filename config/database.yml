@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: paenro_production
-  username: paenro
-  password: <%= ENV['PAENRO_DATABASE_PASSWORD'] %>
+  username:  <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>

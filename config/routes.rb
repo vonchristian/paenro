@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :categories, only: [:new, :create]
     resources :programs, only: [:new, :create] do
       resources :program_grants, only: [:new, :create]
+      resources :program_locations, only: [:new, :create]
+
     end
     resources :requirements, only: [:new, :create]
     resources :crops, only: [:new, :create]
@@ -37,4 +39,5 @@ Rails.application.routes.draw do
       resources :sitios, only: [:new, :create]
     end
   end
+  resources :results, only: [:index]
 end

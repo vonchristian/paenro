@@ -34,12 +34,7 @@
               </div>
             <% end %>
           </div>
-          <div class="col-md-2">
-            <%=link_to products_path(format: 'pdf') do %>
-              <span class="btn btn-default pull-right"><i class="fa fa-file-text-o"></i> View Report</span>
-            <% end %>
-          </div>
-          <div class="col-md-2">
+          <div class="col-md-4">
             <%=link_to new_product_path do %>
               <span class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Product</span>
             <% end %>
@@ -52,7 +47,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th><span class='pull-right'> Stocks </span> </th>
+                <th><span class='pull-right'> Deliveries </span> </th>
                 <th><span class='pull-right'>In Stock</span></th>
                 <th><span class='pull-right'>Claimed </span></th>
                 <th></th>
@@ -61,16 +56,14 @@
             <tbody>
               <% @products.each do |product| %>
                 <tr>
-                  <td><%=link_to product.name, product_path(product) %></td>
+                  <td><%=link_to product.name.try(:upcase), product_path(product) %></td>
                   <td><span class='pull-right'><%=product.quantity %></span></td>
                   <td><span class='pull-right'><%=product.in_stock%></span></td>
                   <td><span class="pull-right"><%=product.claimed %></span></td>
                   <td><%=link_to new_product_stock_path(product), title: 'New Stock' do %>
                     <span class="text-primary"><i class="fa fa-plus-circle" title="New Stock" data-toggle='tooltip'></i>
                     <% end %> &nbsp; &nbsp;
-                    <%=link_to edit_product_path(product), remote: true do %>
-                    <span class="text-danger"><i class="fa fa-pencil" title="Edit" data-toggle='tooltip'></i>
-                    <% end %>
+
                   </td>
                 </tr>
               <% end %>

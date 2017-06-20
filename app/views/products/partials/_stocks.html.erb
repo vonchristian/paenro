@@ -1,10 +1,13 @@
 <div class="tab-pane active" id='stocks'>
+  <%=link_to 'New Stock', new_product_stock_path(@product), class: "btn btn-primary btn-flat" %>
   <div class="table table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
           <th> Date </th>
           <th> Quantity </th>
+          <th> Unit Cost </th>
+          <th> Total Cost </th>
         </tr>
       </thead>
       <tbody>
@@ -12,6 +15,8 @@
           <tr>
             <td><%= stock.date.strftime('%B %e, %Y') %></td>
             <td><%= stock.quantity %></td>
+            <td><%= number_to_currency stock.unit_cost %></td>
+            <td><%= number_to_currency stock.total_cost %></td>
           </tr>
         <% end %>
       </tbody>

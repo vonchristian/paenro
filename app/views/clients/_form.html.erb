@@ -14,7 +14,7 @@
               <center>
                 <%=image_tag(@client.avatar.url(:thumb), class: "img-square img-responsive") %>
                 <br>
-                <%= fr.input :avatar, as: :file, label: "Upload Photo" %>
+                <%= f.input :avatar, as: :file, label: "Upload Photo" %>
               </center>
               <%= f.input :first_name %>
               <%= f.input :middle_name %>

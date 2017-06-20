@@ -1,0 +1,22 @@
+<div class="tab-pane" id="program-settings">
+  <%= link_to 'Add Grant', new_settings_program_program_grant_path(@program), class: "btn btn-danger btn-sm btn-flat" %>
+  <%= link_to 'Add Program Location', new_settings_program_program_location_path(@program), class: "btn btn-danger btn-sm btn-flat" %>
+
+    <% @program.program_locations.each do |program_location| %>
+      <div class="row">
+        <div class="col-md-4">
+          &nbsp; &nbsp; &nbsp; <%= program_location.barangay_name %>
+        </div>
+        <div class="col-md-3">
+          <span class="pull-right"><%= number_to_currency program_location.target_area, unit: "" %> Hectares </span>
+        </div>
+        <div class="col-md-3">
+          <span class="pull-right"><%= number_to_currency program_location.beneficiary_count, unit: "" %> beneficiaries </span>
+        </div>
+        <div class="col-md-2">
+          <%= link_to 'Update', edit_settings_program_location_path(program_location)  %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+</div>

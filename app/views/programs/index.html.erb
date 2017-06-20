@@ -25,9 +25,9 @@
               <% @programs.each do |program| %>
               <div class="row">
                 <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="<%=program.target_percentage%>" data-width="90" data-height="90" data-fgColor="#3c8dbc">
+                  <input type="text" class="knob" value="<%=program.target_percentage %>" data-width="90" data-height="90" data-fgColor="#3c8dbc" readonly="true">
 
-                  <div class="knob-label"><%= program.name %> | <%=program.target_percentage %></div>
+                  <div class="knob-label"><%= program.name %><%= program.target_percentage %></div>
                 </div>
               </div>
               <% end %>
@@ -41,10 +41,91 @@
           <!-- /.box -->
         </div>
         <!-- /.col -->
-      </div>
+
       <!-- /.row -->
 
-    
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">Program Beneficiaries</h3>
+      </div>
+      <div class="box-body">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> Program </th>
+                <th> Target Beneficiaries </th>
+                <th> Actual Beneficiaries </th>
+                <th> Available Slots </th>
+                <th> Target Area </th>
+                <th> Actual Area </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @programs.each do |program| %>
+                <tr>
+                  <td width="400px"><%=link_to program.name, program %></td>
+                  <td><%= program.target_beneficiaries %></td>
+                  <td><%= program.beneficiaries.count %></td>
+                  <td><%= program.available_slots %></td>
+                  <td><span class="pull-right"><%= program.target_area %></span></td>
+                  <td><%= program.actual_area %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="box-footer">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td width="400px"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><span class="pull-right"><%=@programs.target_area %> Ha.</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-12">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"> Beneficiaries per Municipality </h3>
+      </div>
+      <div class="box-body">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> Municipality </th>
+                <% @programs.each do |program| %>
+                  <th> <%= program.name %></th>
+                <% end %>
+            </thead>
+            <tbody>
+              <% Addresses::Municipality.all.each do |municipality| %>
+                <tr>
+                  <td><%= municipality.name %> <span class="badge bg-navy pull-right"><%= municipality.clients.uniq.count %></span></td>
+                  <% @programs.each do |program| %>
+                    <td><%=municipality.clients.in(program).uniq.count %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>
+
+
+
 <script>
   $(function () {
     /* jQueryKnob */
@@ -254,82 +335,3 @@
 </script>
 </body>
 </html>
-
-<div class="row">
-  <div class="col-md-8">
-    <div class="box box-default">
-      <div class="box-header with-border">
-        <h3 class="box-title">Program Beneficiaries</h3>
-      </div>
-      <div class="box-body">
-        <div class="table table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th> Program </th>
-                <th> Target Beneficiaries </th>
-                <th> Actual Beneficiaries </th>
-                <th> Available Slots </th>
-                <th> Target Area </th>
-                <th> Actual Area </th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @programs.each do |program| %>
-                <tr>
-                  <td width="400px"><%= program.name %></td>
-                  <td><%= program.target_beneficiaries %></td>
-                  <td><%= program.beneficiaries.count %></td>
-                  <td><%= program.available_slots %></td>
-                  <td><span class="pull-right"><%= program.target_area %></span></td>
-                  <td><%= program.actual_area %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="box-footer">
-            <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <td width="400px"></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><span class="pull-right"><%=@programs.target_area %> Ha.</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div class="col-md-12">
-    <div class="box box-default">
-      <div class="box-header with-border">
-        <h3 class="box-title"> Beneficiaries per Municipality </h3>
-      </div>
-      <div class="box-body">
-        <div class="table table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th> Municipality </th>
-                <% @programs.each do |program| %>
-                  <th> <%= program.name %></th>
-                <% end %>
-            </thead>
-            <tbody>
-              <% Addresses::Municipality.all.each do |municipality| %>
-                <tr>
-                  <td><%= municipality.name %> <span class="badge bg-navy pull-right"><%= municipality.clients.uniq.count %></span></td>
-                  <% @programs.each do |program| %>
-                    <td><%=municipality.clients.in(program).uniq.count %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-</div>

@@ -1,7 +1,8 @@
 <%= simple_form_for @program, url: :settings_programs do |f| %>
   <%= f.error_notification %>
   <%= f.input :name %>
-  <%= f.input :barangay_ids, collection: Addresses::Barangay.all.map{|a| [a.name, a.id] }, as: :check_boxes, label: "Barangays" %>
-
+  <%= f.simple_fields_for :program_locations do |ff| %>
+    <%= ff.input :barangay_id, collection: Addresses::Barangay.all.map{|a| [a.name.titleize, a.id] }, as: :check_boxes %>
+  <% end %>
   <%= f.submit "Create Program" %>
 <% end %>

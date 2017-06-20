@@ -5,7 +5,7 @@ module Products
     belongs_to :product
     has_many :line_items, class_name: "Orders::LineItem"
 
-    validates :quantity, presence: true, numericality: { greater_than: 0.1 }
+    validates :quantity, :unit_cost, :total_cost, presence: true, numericality: { greater_than: 0.1 }
     validates :date, presence: true
     delegate :unit, to: :product
     before_commit :set_name, :set_description

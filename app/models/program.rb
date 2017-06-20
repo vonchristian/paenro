@@ -7,6 +7,8 @@ class Program < ApplicationRecord
   has_many :program_grants, class_name: "Programs::ProgramGrant"
 
   validates :name, presence: true, uniqueness: true
+
+  accepts_nested_attributes_for :program_locations
   def self.target_area
     all.to_a.sum(&:target_area)
   end
@@ -25,7 +27,7 @@ class Program < ApplicationRecord
   end
   def target_percentage
     if !actual_beneficiaries.zero? && !target_beneficiaries.zero?
-      (actual_beneficiaries / target_beneficiaries )  * 100
+      ((actual_beneficiaries / target_beneficiaries )  * 100).to_f
     else
       0
     end

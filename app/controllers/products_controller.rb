@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
         format.html
         format.pdf do
-          pdf = ProductsPdf.new(@products, view_context)
+          pdf = Reports::InventoryPdf.new(@products, view_context)
                 send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Products Report.pdf"
         end
       end
