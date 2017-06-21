@@ -1,1 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-widget widget-user-2">
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header">
+
+        <!-- /.widget-user-image -->
+        <h3 class="widget-user-username"><%= @farm.client_full_name %></h3>
+        <h5 class="widget-user-desc"><span class='text-green'>  </span></h5>
+      </div>
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#beneficiaries" data-toggle="tab">Beneficiaries </a></li>
+        <li><a href="#claimed" data-toggle="tab">Claimed Products</a></li>
+        <li><a href="#business_settings" data-toggle="tab">Reports</a></li>
+        <li><a href="#program-settings" data-toggle="tab">Settings</a></li>
+
+      </ul>
+      <div class="tab-content">
+        <%#=render 'programs/partials/beneficiaries' %>
+        <%#=render 'programs/partials/settings' %>
+        <%#=render 'businesses/partials/business_info' %>
+        <%#=render 'businesses/partials/permits' %>
+        <%#=render 'businesses/partials/settings' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <%= link_to 'New Crop', new_farm_cropping_path(@farm) %>

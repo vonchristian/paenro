@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-default">
+      <div class="box-header">
+        <h3 class="box-title"> Reports </h3>
+      </div>
+      <div class="box-body">
+        <%= link_to 'Claims', claims_reports_path(format: 'pdf') %><br>
+        <small class="text-muted"> Generate report of claims </small>
+        <hr>
+        <%= link_to 'Inventory Report', products_path(format: 'pdf') %><br>
+        <small class="text-muted"> Generate report of inventories </small>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

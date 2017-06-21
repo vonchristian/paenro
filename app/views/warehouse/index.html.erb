@@ -1,9 +1,4 @@
 
-<section class="content-header">
-    <h1>Warehouse </h1>
-    <p class="text-muted">PAENRO IFUGAO</p>
-</section>
-<br>
 <div class="row">
   <div class="col-md-7">
     <div class="box box-default">
@@ -93,7 +88,7 @@
             <div class="box-footer">
               <%= simple_form_for Order.new do |f| %>
                 <%= f.input :client_id, collection: Client.all.map{ |a| [a.full_name, a.id] }, prompt: 'Select Client'%>
-                <%= f.input :date, label: "Date Released", as: :string, input_html: { class: "datepicker" } %>
+                <%= f.input :date, label: "Date Released", as: :string, input_html: { value: Time.zone.now.strftime("%B %e, %Y"), class: "datepicker" } %>
                 <%= f.submit "Checkout", class: "btn btn-success btn-block btn-flat" %>
               <% end %>
             </div>

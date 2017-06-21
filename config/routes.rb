@@ -40,4 +40,7 @@ Rails.application.routes.draw do
     end
   end
   resources :results, only: [:index]
+  resources :reports, only: [:index]
+  resources :claims_reports, only: [:index], module: :reports
+
 end

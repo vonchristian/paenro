@@ -7,6 +7,8 @@ module Clients
     has_many :croppings, class_name: "Farms::Cropping"
     has_many :crops
 
+    delegate :full_name, to: :client, prefix: true, allow_nil: true
+
     validates :area, presence: true, numericality: true
     before_commit :set_name #used for pg_search_scope
     def self.total_area

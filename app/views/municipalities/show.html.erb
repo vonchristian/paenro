@@ -1,5 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header">
+        <h3 class="box-title"> <%= @municipality.name.upcase %> </h3>
+      </div>
+      <div class="box-body">
 <%= link_to 'New Barangay', new_settings_municipality_barangay_path(@municipality), class: "btn btn-primary btn-flat" %>
+<hr>
 
 <% @municipality.barangays.each do |barangay| %>
-  <%= link_to barangay.name, barangay_path(barangay) %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <%= link_to barangay.name, barangay_path(barangay) %>
+    </div>
+  </div>
+  <br>
 <% end %>
